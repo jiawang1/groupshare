@@ -1,0 +1,45 @@
+<mvc:View controllerName="fin.confin.con.groupshare.controller.GroupShare" xmlns:html="http://www.w3.org/1999/xhtml"
+	xmlns:mvc="sap.ui.core.mvc" displayBlock="true" xmlns="sap.m">
+	<App>
+		<pages>
+			<Page title="{i18n>title}">
+				<Table 
+					    id="activityList"
+      headerText="{i18n>invoiceListTitle}"
+      class="sapUiResponsiveMargin"
+      width="auto"
+         items="{
+         path : 'groupshare>/ConsolidationUnits'
+      }">
+					
+		<columns>
+			<Column
+				hAlign="End"
+				minScreenWidth="Small"
+				demandPopin="true"
+				width="4em">
+				<Text text="{i18n>columnAN}"/>
+			</Column>
+			<Column>
+				<Text text="{i18n>columnIP}"/>
+			</Column>
+		</columns>
+
+					<items>
+			<ColumnListItem
+				type="Navigation"
+				press="onPress">
+				<cells>
+					<ObjectNumber number="{groupshare>Id}" emphasized="false"/>
+					<ObjectIdentifier title="{groupshare>UnitId}"/>
+
+				</cells>
+			</ColumnListItem>
+      </items>
+	
+					
+				</Table>
+			</Page>
+		</pages>
+	</App>
+</mvc:View>
