@@ -24,10 +24,10 @@ sap.ui.define([
 			// set the device model
 			this.setModel(models.createDeviceModel(), "device");
 			
-			 //var oModel = new ODataModel({
-    //     		serviceUrl : "/ConsolidationUnits/",
-    //     		synchronizationMode : "None"
-    // });
+			 var oModel = new ODataModel({
+         		serviceUrl : "/ConsolidationUnits/",
+         		synchronizationMode : "None"
+     });
 		}
 	});
 });
