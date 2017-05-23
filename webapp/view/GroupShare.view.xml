@@ -1,45 +1,107 @@
-<mvc:View controllerName="fin.confin.con.groupshare.controller.GroupShare" xmlns:html="http://www.w3.org/1999/xhtml"
-	xmlns:mvc="sap.ui.core.mvc" displayBlock="true" xmlns="sap.m">
+<mvc:View controllerName="fin.confin.con.groupshare.controller.GroupShare" 
+	xmlns:html="http://www.w3.org/1999/xhtml"
+	xmlns:mvc="sap.ui.core.mvc" displayBlock="true" 
+	xmlns="sap.m"
+	xmlns:smartfilterbar="sap.ui.comp.smartfilterbar"
+	xmlns:semantic="sap.m.semantic"
+	xmlns:l="sap.ui.layout"
+	xmlns:core="sap.ui.core" 
+	xmlns:fb="sap.ui.comp.filterbar"
+	xmlns:smarttable="sap.ui.comp.smarttable"
+	>
 	<App>
+
+
+
+
 		<pages>
-			<Page title="{i18n>title}">
-				<Table 
-					    id="activityList"
-      headerText="{i18n>invoiceListTitle}"
+			<semantic:FullscreenPage
+            id="page"
+            semanticRuleSet="Optimized"
+            title="{i18n>title}">
+			  <l:VerticalLayout xmlns:sap.ui.layout="sap.ui.layout" width="100%" id="__layout0">
+			  	 <l:content>
+				   <!--<fb:FilterBar reset="onReset" search="onSearch" showRestoreButton="true" showClearButton="true">
+			<fb:filterItems>
+				<fb:FilterItem name="search" >
+					<fb:control>
+						<SearchField></SearchField>
+					</fb:control>				
+				</fb:FilterItem>
+				
+				<fb:FilterItem name="version"  label="{i18n>filterVersion}" labelTooltip="" >
+					<fb:control>
+						<Input type="Text"/>
+					</fb:control>				
+				</fb:FilterItem>
+				<fb:FilterItem name="fiscalYesr" label="{i18n>filterFiscalYesr}" labelTooltip="" >
+					<fb:control>
+						<Input type="Text"/>
+					</fb:control>				
+				</fb:FilterItem>					
+			</fb:filterItems>
+
+				   </fb:FilterBar>	-->
+                    <smartfilterbar:SmartFilterBar
+                            id='smartFilterBar'
+							entitySet="InvestmentActivitys"
+                            persistencyKey="SmartFilter_Explored"
+                            >
+                        <smartfilterbar:controlConfiguration>
+                            <smartfilterbar:ControlConfiguration groupId="_BASIC"
+                                                                 index="1" 
+																 key="MyOwnFilterField"
+																 visibleInAdvancedArea="true"
+                                                                 width="300px">
+											<smartfilterbar:customControl>
+															<SearchField
+																id="search"
+																type="Text"
+																placeholder=""
+																 />
+											</smartfilterbar:customControl>
+                            </smartfilterbar:ControlConfiguration>
+ 						 </smartfilterbar:controlConfiguration>
+
+                    </smartfilterbar:SmartFilterBar>
+				   </l:content>
+			    </l:VerticalLayout>
+					<IconTabBar id="idIconTabBarNoIcons" class="sapUiResponsiveContentPadding">
+<items>
+	<IconTabFilter
+				text="{i18n>tabActivity}">
+
+			<smarttable:SmartTable id="activityTable"
+					ignoredFields=""
+					width="auto" 
+					initiallyVisibleFields="ActivityNumber,PostDate,ConsolidationUnitInvester,ConsolidationUnitInvestee,DirectInvestPercentage,Comments"
+					tableType="ResponsiveTable"
+					useTablePersonalisation="true"
+					header="{i18n>activityTableHeader}"
+					entitySet="InvestmentActivitys"
+					enableAutoBinding="true" beforeRebindTable="onBeforeRebind">
+			
+
+	<!--<Table 
+			id="activityList"
+			smartFilterId="smartFilterBar"
+      headerText="{i18n>activetyTableHeader}"
       class="sapUiResponsiveMargin"
       width="auto"
          items="{
-         path : 'groupshare>/ConsolidationUnits'
-      }">
-					
-		<columns>
-			<Column
-				hAlign="End"
-				minScreenWidth="Small"
-				demandPopin="true"
-				width="4em">
-				<Text text="{i18n>columnAN}"/>
-			</Column>
-			<Column>
-				<Text text="{i18n>columnIP}"/>
-			</Column>
-		</columns>
+         path : 'groupshare>/InvestmentActivitys'
+      }">-->
 
-					<items>
-			<ColumnListItem
-				type="Navigation"
-				press="onPress">
-				<cells>
-					<ObjectNumber number="{groupshare>Id}" emphasized="false"/>
-					<ObjectIdentifier title="{groupshare>UnitId}"/>
-
-				</cells>
-			</ColumnListItem>
-      </items>
-	
-					
-				</Table>
-			</Page>
+				 </smarttable:SmartTable>
+					</IconTabFilter>
+					<IconTabFilter
+						text="{i18n>tabGroupShare}">
+						<Text text="Group share go here ..." />
+					</IconTabFilter>
+				</items>
+		</IconTabBar>
+			 </semantic:FullscreenPage>
 		</pages>
+
 	</App>
 </mvc:View>
