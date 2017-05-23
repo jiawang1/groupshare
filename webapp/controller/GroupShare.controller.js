@@ -15,10 +15,15 @@ sap.ui.define([
 			oTable.getBinding("groupshare>/InvestmentActivitys").filter([]);
 
 		},
-		onBeforeRebind:function(oEvent){
+		onBefore:function(oEvent){
 
-			
+			oEvent.getParameter('bindingParams').parameters.select = "*"
 
 		}
+		// onBeforeRebind:function(oEvent){
+
+
+
+		// }
 	});
 });

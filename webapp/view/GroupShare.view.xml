@@ -12,8 +12,6 @@
 	<App>
 
 
-
-
 		<pages>
 			<semantic:FullscreenPage
             id="page"
@@ -67,38 +65,115 @@
 				   </l:content>
 			    </l:VerticalLayout>
 					<IconTabBar id="idIconTabBarNoIcons" class="sapUiResponsiveContentPadding">
-<items>
-	<IconTabFilter
-				text="{i18n>tabActivity}">
+						<items>
+							<IconTabFilter
+										text="{i18n>tabActivity}">
 
-			<smarttable:SmartTable id="activityTable"
-					ignoredFields=""
-					width="auto" 
-					initiallyVisibleFields="ActivityNumber,PostDate,ConsolidationUnitInvester,ConsolidationUnitInvestee,DirectInvestPercentage,Comments"
-					tableType="ResponsiveTable"
-					useTablePersonalisation="true"
-					header="{i18n>activityTableHeader}"
-					entitySet="InvestmentActivitys"
-					enableAutoBinding="true" beforeRebindTable="onBeforeRebind">
-			
+									<smarttable:SmartTable id="activityTable"
+											ignoredFields=""
+											width="auto" 
+											initiallyVisibleFields="ActivityNumber"
+											tableType="ResponsiveTable"
+											useTablePersonalisation="true"
+											header="{i18n>activityTableHeader}"
+											entitySet="InvestmentActivitys"
+											enableAutoBinding="true" beforeRebindTable="onBefore" >
+									
+										<Table>
+											<columns>
+												<Column id="ActivityNumber" width="auto" minScreenWidth="Tablet" hAlign="Left" >
+													  <customData> 
+          												<core:CustomData key="p13nData" value='\{"columnKey":"ActivityNumber","leadingProperty": "ActivityNumber"}'/>
+    												 </customData>
+													<header>
+														<Label text="{i18n>columnAN}"/> 
+													</header>
+												</Column>   
+												<Column id="PostDate" width="auto" minScreenWidth="Tablet" hAlign="Left" >
+													  <customData> 
+          												<core:CustomData key="p13nData" value='\{"columnKey":"PostDate","leadingProperty": "PostDate"}'/>
+    												 </customData>
+													<header>
+														<Label text="{i18n>columnIP}"/> 
+													</header>
+												</Column> 
 
-	<!--<Table 
-			id="activityList"
-			smartFilterId="smartFilterBar"
-      headerText="{i18n>activetyTableHeader}"
-      class="sapUiResponsiveMargin"
-      width="auto"
-         items="{
-         path : 'groupshare>/InvestmentActivitys'
-      }">-->
+												<Column id="ConsolidationUnitInvester" width="auto" minScreenWidth="Tablet" hAlign="Left" >
+													  <customData> 
+          												<core:CustomData key="p13nData" value='\{"columnKey":"ConsolidationUnitInvester","leadingProperty": "ConsolidationUnitInvester"}'/>
+    												 </customData>
+													<header>
+														<Label text="{i18n>columnCU}"/> 
+													</header>
+												</Column> 
 
-				 </smarttable:SmartTable>
-					</IconTabFilter>
-					<IconTabFilter
-						text="{i18n>tabGroupShare}">
-						<Text text="Group share go here ..." />
-					</IconTabFilter>
-				</items>
+												<Column id="ConsolidationUnitInvestee" width="auto" minScreenWidth="Tablet" hAlign="Left" >
+													  <customData> 
+          												<core:CustomData key="p13nData" value='\{"columnKey":"ConsolidationUnitInvestee","leadingProperty": "ConsolidationUnitInvestee"}'/>
+    												 </customData>
+													<header>
+														<Label text="{i18n>columnIU}"/> 
+													</header>
+												</Column> 
+
+												<Column id="DirectInvestPercentage" width="auto" minScreenWidth="Tablet" hAlign="Right" >
+													  <customData> 
+          												<core:CustomData key="p13nData" value='\{"columnKey":"DirectInvestPercentage","leadingProperty": "DirectInvestPercentage"}'/>
+    												 </customData>
+													<header>
+														<Label text="{i18n>columnDI}"/> 
+													</header>
+												</Column> 
+
+												<Column id="Comments" width="auto" minScreenWidth="Tablet" hAlign="Left" >
+													  <customData> 
+          												<core:CustomData key="p13nData" value='\{"columnKey":"Comments","leadingProperty": "Comments"}'/>
+    												 </customData>
+													<header>
+														<Label text="{i18n>columnCS}"/> 
+													</header>
+												</Column> 
+
+
+											</columns> 
+											<items>
+												<ColumnListItem id="columnListItem" vAlign="Middle" >
+													<cells>
+														<Text text="{ActivityNumber}" maxLines="2"/>
+													</cells>
+
+													<cells>
+														<Text text="{PostDate}" maxLines="2"/>
+													</cells>
+
+													<cells>
+														<Text text="{ConsolidationUnitInvester}" maxLines="2"/>
+													</cells>
+
+													<cells>
+														<Text text="{ConsolidationUnitInvestee}" maxLines="2"/>
+													</cells>
+
+														<cells>
+														<Text text="{DirectInvestPercentage}" maxLines="2"/>
+													</cells>
+													<cells>
+														<Text text="{Comments}" maxLines="2"/>
+													</cells>
+
+													
+												</ColumnListItem>
+											</items>
+										</Table>
+
+
+										</smarttable:SmartTable>
+											</IconTabFilter>
+											<IconTabFilter
+												text="{i18n>tabGroupShare}">
+												<Text text="Group share go here ..." />
+								</IconTabFilter>
+							</items>
 		</IconTabBar>
 			 </semantic:FullscreenPage>
 		</pages>
