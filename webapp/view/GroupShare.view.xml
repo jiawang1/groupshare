@@ -8,6 +8,7 @@
 	xmlns:core="sap.ui.core" 
 	xmlns:fb="sap.ui.comp.filterbar"
 	xmlns:smarttable="sap.ui.comp.smarttable"
+	xmlns:alv="sap.ui.table"
 	>
 	<App>
 
@@ -73,7 +74,7 @@
 											ignoredFields=""
 											width="auto" 
 											initiallyVisibleFields="ActivityNumber"
-											tableType="ResponsiveTable"
+											tableType="AnalyticalTable"
 											useTablePersonalisation="true"
 											header="{i18n>activityTableHeader}"
 											entitySet="InvestmentActivitys"
@@ -116,6 +117,15 @@
 													</header>
 												</Column> 
 
+												<!--<alv:AnalyticalColumn id="ConsolidationUnitInvestee" width="auto" minScreenWidth="Tablet" hAlign="Left" >
+													  <customData> 
+          												<core:CustomData key="p13nData" value='\{"columnKey":"ConsolidationUnitInvestee","leadingProperty": "ConsolidationUnitInvestee"}'/>
+    												 </customData>
+													<header>
+														<Label text="{i18n>columnIU}"/> 
+													</header>
+												</alv:AnalyticalColumn > -->
+
 												<Column id="DirectInvestPercentage" width="auto" minScreenWidth="Tablet" hAlign="Right" >
 													  <customData> 
           												<core:CustomData key="p13nData" value='\{"columnKey":"DirectInvestPercentage","leadingProperty": "DirectInvestPercentage"}'/>
@@ -145,9 +155,8 @@
 													<cells>
 														<Text text="{PostDate}" maxLines="2"/>
 													</cells>
-
 													<cells>
-														<Text text="{ConsolidationUnitInvester}" maxLines="2"/>
+														<Text text="{/InvestmentActivity/ConsolidationUnitInvester}" maxLines="2"/>
 													</cells>
 
 													<cells>
