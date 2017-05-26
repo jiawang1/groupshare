@@ -1,191 +1,88 @@
-<mvc:View controllerName="fin.confin.con.groupshare.controller.GroupShare" 
-	xmlns:html="http://www.w3.org/1999/xhtml"
-	xmlns:mvc="sap.ui.core.mvc" displayBlock="true" 
-	xmlns="sap.m"
-	xmlns:smartfilterbar="sap.ui.comp.smartfilterbar"
-	xmlns:semantic="sap.m.semantic"
-	xmlns:l="sap.ui.layout"
-	xmlns:core="sap.ui.core" 
-	xmlns:fb="sap.ui.comp.filterbar"
-	xmlns:smarttable="sap.ui.comp.smarttable"
-	xmlns:alv="sap.ui.table"
-	>
+<mvc:View controllerName="fin.confin.con.groupshare.controller.GroupShare" xmlns:html="http://www.w3.org/1999/xhtml"
+	xmlns:mvc="sap.ui.core.mvc" displayBlock="true" xmlns="sap.m" xmlns:smartfilterbar="sap.ui.comp.smartfilterbar"
+	xmlns:semantic="sap.m.semantic" xmlns:l="sap.ui.layout" xmlns:core="sap.ui.core" xmlns:fb="sap.ui.comp.filterbar"
+	xmlns:smarttable="sap.ui.comp.smarttable" xmlns:table="sap.ui.table">
 	<App>
-
-
 		<pages>
-			<semantic:FullscreenPage
-            id="page"
-            semanticRuleSet="Optimized"
-            title="{i18n>title}">
-			  <l:VerticalLayout xmlns:sap.ui.layout="sap.ui.layout" width="100%" id="__layout0">
-			  	 <l:content>
-				   <!--<fb:FilterBar reset="onReset" search="onSearch" showRestoreButton="true" showClearButton="true">
-			<fb:filterItems>
-				<fb:FilterItem name="search" >
-					<fb:control>
-						<SearchField></SearchField>
-					</fb:control>				
-				</fb:FilterItem>
-				
-				<fb:FilterItem name="version"  label="{i18n>filterVersion}" labelTooltip="" >
-					<fb:control>
-						<Input type="Text"/>
-					</fb:control>				
-				</fb:FilterItem>
-				<fb:FilterItem name="fiscalYesr" label="{i18n>filterFiscalYesr}" labelTooltip="" >
-					<fb:control>
-						<Input type="Text"/>
-					</fb:control>				
-				</fb:FilterItem>					
-			</fb:filterItems>
-
-				   </fb:FilterBar>	-->
-                    <smartfilterbar:SmartFilterBar
-                            id='smartFilterBar'
-							entitySet="InvestmentActivitys"
-                            persistencyKey="SmartFilter_Explored"
-                            >
-                        <smartfilterbar:controlConfiguration>
-                            <smartfilterbar:ControlConfiguration groupId="_BASIC"
-                                                                 index="1" 
-																 key="MyOwnFilterField"
-																 visibleInAdvancedArea="true"
-                                                                 width="300px">
-											<smartfilterbar:customControl>
-															<SearchField
-																id="search"
-																type="Text"
-																placeholder=""
-																 />
-											</smartfilterbar:customControl>
-                            </smartfilterbar:ControlConfiguration>
- 						 </smartfilterbar:controlConfiguration>
-
-                    </smartfilterbar:SmartFilterBar>
-				   </l:content>
-			    </l:VerticalLayout>
-					<IconTabBar id="idIconTabBarNoIcons" class="sapUiResponsiveContentPadding">
-						<items>
-							<IconTabFilter
-										text="{i18n>tabActivity}">
-
-									<smarttable:SmartTable id="activityTable"
-											ignoredFields=""
-											width="auto" 
-											initiallyVisibleFields="ActivityNumber"
-											tableType="AnalyticalTable"
-											useTablePersonalisation="true"
-											header="{i18n>activityTableHeader}"
-											entitySet="InvestmentActivitys"
-											enableAutoBinding="true" beforeRebindTable="onBefore" >
-									
-										<Table>
-											<columns>
-												<Column id="ActivityNumber" width="auto" minScreenWidth="Tablet" hAlign="Left" >
-													  <customData> 
-          												<core:CustomData key="p13nData" value='\{"columnKey":"ActivityNumber","leadingProperty": "ActivityNumber"}'/>
-    												 </customData>
-													<header>
-														<Label text="{i18n>columnAN}"/> 
-													</header>
-												</Column>   
-												<Column id="PostDate" width="auto" minScreenWidth="Tablet" hAlign="Left" >
-													  <customData> 
-          												<core:CustomData key="p13nData" value='\{"columnKey":"PostDate","leadingProperty": "PostDate"}'/>
-    												 </customData>
-													<header>
-														<Label text="{i18n>columnIP}"/> 
-													</header>
-												</Column> 
-
-												<Column id="ConsolidationUnitInvester" width="auto" minScreenWidth="Tablet" hAlign="Left" >
-													  <customData> 
-          												<core:CustomData key="p13nData" value='\{"columnKey":"ConsolidationUnitInvester","leadingProperty": "ConsolidationUnitInvester"}'/>
-    												 </customData>
-													<header>
-														<Label text="{i18n>columnCU}"/> 
-													</header>
-												</Column> 
-
-												<Column id="ConsolidationUnitInvestee" width="auto" minScreenWidth="Tablet" hAlign="Left" >
-													  <customData> 
-          												<core:CustomData key="p13nData" value='\{"columnKey":"ConsolidationUnitInvestee","leadingProperty": "ConsolidationUnitInvestee"}'/>
-    												 </customData>
-													<header>
-														<Label text="{i18n>columnIU}"/> 
-													</header>
-												</Column> 
-
-												<!--<alv:AnalyticalColumn id="ConsolidationUnitInvestee" width="auto" minScreenWidth="Tablet" hAlign="Left" >
-													  <customData> 
-          												<core:CustomData key="p13nData" value='\{"columnKey":"ConsolidationUnitInvestee","leadingProperty": "ConsolidationUnitInvestee"}'/>
-    												 </customData>
-													<header>
-														<Label text="{i18n>columnIU}"/> 
-													</header>
-												</alv:AnalyticalColumn > -->
-
-												<Column id="DirectInvestPercentage" width="auto" minScreenWidth="Tablet" hAlign="Right" >
-													  <customData> 
-          												<core:CustomData key="p13nData" value='\{"columnKey":"DirectInvestPercentage","leadingProperty": "DirectInvestPercentage"}'/>
-    												 </customData>
-													<header>
-														<Label text="{i18n>columnDI}"/> 
-													</header>
-												</Column> 
-
-												<Column id="Comments" width="auto" minScreenWidth="Tablet" hAlign="Left" >
-													  <customData> 
-          												<core:CustomData key="p13nData" value='\{"columnKey":"Comments","leadingProperty": "Comments"}'/>
-    												 </customData>
-													<header>
-														<Label text="{i18n>columnCS}"/> 
-													</header>
-												</Column> 
-
-
-											</columns> 
-											<items>
-												<ColumnListItem id="columnListItem" vAlign="Middle" >
-													<cells>
-														<Text text="{ActivityNumber}" maxLines="2"/>
-													</cells>
-
-													<cells>
-														<Text text="{PostDate}" maxLines="2"/>
-													</cells>
-													<cells>
-														<Text text="{/InvestmentActivity/ConsolidationUnitInvester}" maxLines="2"/>
-													</cells>
-
-													<cells>
-														<Text text="{ConsolidationUnitInvestee}" maxLines="2"/>
-													</cells>
-
-														<cells>
-														<Text text="{DirectInvestPercentage}" maxLines="2"/>
-													</cells>
-													<cells>
-														<Text text="{Comments}" maxLines="2"/>
-													</cells>
-
-													
-												</ColumnListItem>
-											</items>
-										</Table>
-
-
-										</smarttable:SmartTable>
-											</IconTabFilter>
-											<IconTabFilter
-												text="{i18n>tabGroupShare}">
-												<Text text="Group share go here ..." />
-								</IconTabFilter>
-							</items>
-		</IconTabBar>
-			 </semantic:FullscreenPage>
+			<semantic:FullscreenPage id="page" semanticRuleSet="Optimized" title="{i18n>title}">
+				<l:VerticalLayout xmlns:sap.ui.layout="sap.ui.layout" width="100%" id="__layout0">
+					<l:content>
+						<smartfilterbar:SmartFilterBar id='smartFilterBar' entitySet="InvestmentActivitys" persistencyKey="SmartFilter_Explored">
+							<smartfilterbar:controlConfiguration>
+								<smartfilterbar:ControlConfiguration groupId="_BASIC" index="1" key="MyOwnFilterField" visibleInAdvancedArea="true" width="300px">
+									<smartfilterbar:customControl>
+										<SearchField id="search" placeholder=""/>
+									</smartfilterbar:customControl>
+								</smartfilterbar:ControlConfiguration>
+							</smartfilterbar:controlConfiguration>
+							<smartfilterbar:controlConfiguration>
+								<smartfilterbar:ControlConfiguration groupId="_BASIC" index="2" key="fiscalYear" visibleInAdvancedArea="true" width="300px">
+									<smartfilterbar:customControl>
+										<Select id="fiscalYear" visible="true" enabled="true" items="{fiscalYear>/data}">
+											<core:ListItem key="{fiscalYear>key}" text="{fiscalYear>value}"/>
+										</Select>
+									</smartfilterbar:customControl>
+								</smartfilterbar:ControlConfiguration>
+							</smartfilterbar:controlConfiguration>
+						</smartfilterbar:SmartFilterBar>
+					</l:content>
+				</l:VerticalLayout>
+				<IconTabBar id="idIconTabBarNoIcons" class="sapUiResponsiveContentPadding">
+					<items>
+						<IconTabFilter text="{i18n>tabActivity}">
+							<smarttable:SmartTable id="ee" entitySet="InvestmentActivitys" smartFilterId="smartFilterBar" header="{i18n>tabActivity}"
+								tableType="AnalyticalTable"  showTablePersonalisation="true" enableAutoBinding="true"   beforeRebindTable="onBeforeRebind">
+											<smarttable:customToolbar>
+												<Toolbar>
+													<Title id="title" header="{i18n>tabActivity}"/>
+													<ToolbarSpacer/>
+													<SearchField
+														placeholder="Filter"
+														search="handleTxtFilter"
+														width="15rem"/>
+												</Toolbar>
+										</smarttable:customToolbar>
+								<table:AnalyticalTable id="activityList" visibleRowCount="20" showColumnVisibilityMenu="true" selectionMode="MultiToggle"
+									entitySet="InvestmentActivitys" enableColumnFreeze="false" enableCellFilter="true">
+									<table:AnalyticalColumn id="ActivityNumber" label="{i18n>columnAN}" leadingProperty="ActivityNumber" grouped="false">
+										<table:template>
+											<Text text="{ActivityNumber}"/>
+										</table:template>
+									</table:AnalyticalColumn>
+									<table:AnalyticalColumn id="PostDate" label="{i18n>columnIP}" leadingProperty="PostDate" grouped="false">
+										<table:template>
+											<Text text="{PostDate}"/>
+										</table:template>
+									</table:AnalyticalColumn>
+									<table:AnalyticalColumn id="ConsolidationUnitInvester" label="{i18n>columnCU}" leadingProperty="ConsolidationUnitInvester" grouped="false">
+										<table:template>
+											<Text text="{ConsolidationUnitInvester}"/>
+										</table:template>
+									</table:AnalyticalColumn>
+									<table:AnalyticalColumn id="ConsolidationUnitInvestee" label="{i18n>columnIU}" leadingProperty="ConsolidationUnitInvestee" grouped="false">
+										<table:template>
+											<Text text="{ConsolidationUnitInvestee}"/>
+										</table:template>
+									</table:AnalyticalColumn>
+									<table:AnalyticalColumn id="DirectInvestPercentage" label="{i18n>columnDI}" leadingProperty="DirectInvestPercentage" grouped="false">
+										<table:template>
+											<Text text="{DirectInvestPercentage}" />
+										</table:template>
+									</table:AnalyticalColumn>
+									<table:AnalyticalColumn id="Comments" label="{i18n>columnCS}" leadingProperty="Comments" grouped="false">
+										<table:template>
+											<Text text="{Comments}"/>
+										</table:template>
+									</table:AnalyticalColumn>
+								</table:AnalyticalTable>
+							</smarttable:SmartTable>
+						</IconTabFilter>
+						<IconTabFilter text="{i18n>tabGroupShare}">
+							<Text text="Group share go here ..."/>
+						</IconTabFilter>
+					</items>
+				</IconTabBar>
+			</semantic:FullscreenPage>
 		</pages>
-
 	</App>
 </mvc:View>
