@@ -1,0 +1,68 @@
+<core:FragmentDefinition
+   xmlns="sap.m"
+   xmlns:form="sap.ui.layout.form"
+   xmlns:core="sap.ui.core" >
+   <Dialog
+      id="newActivity"
+      title="{i18n>activityTitle}">
+
+
+<form:SimpleForm id="newForm" layout="ResponsiveGridLayout" 
+   labelSpanXL="4"
+			labelSpanL="3"
+			labelSpanM="4"
+			labelSpanS="5"
+			adjustLabelSpan="false"
+			emptySpanXL="0"
+			emptySpanL="4"
+			emptySpanM="0"
+			emptySpanS="0"
+			columnsXL="2"
+			columnsL="1"
+			columnsS="1"
+			singleContainerFullSize="false">
+        <Title text="{i18n>activityDtail}"></Title>
+    	<Label text="{i18n>filterFiscalYesr}" class="sapUiSmallMarginTop sapUiTinyMarginBottom" />
+        	<Select id="_fiscalYear" enabled="true" items="{fiscalYear>/data}" class="test_">
+                <core:ListItem key="{fiscalYear>key}" text="{fiscalYear>value}"/>
+            </Select>
+
+        <Label text="{i18n>columnCU}"  class="sapUiSmallMarginTop sapUiTinyMarginBottom"/>
+        	<Input
+				id="_cu"
+				type="Text"
+				placeholder="Enter Product ..."
+				valueHelpRequest="handleValueHelp"/>
+        <Label text="{i18n>columnIU}" class="sapUiSmallMarginTop sapUiTinyMarginBottom" />
+        	<Input
+				id="_iu"
+				type="Text"
+				placeholder="Enter Product ..."
+				valueHelpRequest="handleValueHelp"/>
+        <Label text="{i18n>columnDI}" class="sapUiSmallMarginTop sapUiTinyMarginBottom"/>
+        	<Input
+				id="_di"
+				type="Text"
+				placeholder="Enter Percentage ..."
+				valueHelpRequest="handleValueHelp"/>
+        <Label text="{i18n>columnCS}"  class="sapUiSmallMarginTop sapUiTinyMarginBottom"/>
+        	<TextArea
+				id="_cm"
+				type="Text"
+				placeholder="Comments ..."/>
+               
+    </form:SimpleForm>
+ 
+	    <beginButton>
+         <Button
+            text="{i18n>buttonSave}"
+            press="onSave"/>
+      </beginButton>
+      <endButton>
+         <Button
+            text="{i18n>buttonCancel}"
+            press="onCloseDialog"/>
+      </endButton>
+   
+   </Dialog>
+</core:FragmentDefinition>
