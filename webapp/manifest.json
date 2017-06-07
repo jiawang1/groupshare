@@ -13,7 +13,7 @@
 		"ach": "ach",
 				"dataSources": {
 			"mainService": {
-				"uri": "/groupshare/odata.svc/",
+				"uri": "/groupshare/",
 				"type": "OData",
 				"settings": {
 					"odataVersion": "2.0",
