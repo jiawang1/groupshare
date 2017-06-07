@@ -27,10 +27,16 @@ sap.ui.define([
 			this.setModel(models.createDeviceModel(), "device");
 			
 			 var oModel = new ODataModel({
+<<<<<<< HEAD
 				serviceUrl : "/ConsolidationUnits/",
 				synchronizationMode : "None"
 			});
 			
+=======
+         		serviceUrl : "/ConsolidationUnits/",
+         		synchronizationMode : "None"
+     });
+>>>>>>> 3d56a6209ef522ecadd9465a142e04236b1d64ef
 		}
 	});
 });
