@@ -21,6 +21,7 @@ sap.ui.define([
 				]
 			};
 
+			var that = this;
 			var oFiscalModel = new JSONModel(aFiscalYear);
 			this.getView().setModel(oFiscalModel, "fiscalYear");
 
@@ -30,6 +31,8 @@ sap.ui.define([
 			// var comp = this.getOwnerComponent();
 
 			// this.__newDialog =  new NewActivity(this.getOwnerComponent().getRootControl());
+
+					
 
 		},
 
@@ -80,8 +83,20 @@ sap.ui.define([
 
 		onDelete: function (oEvent) {
 
-			var aSelects = this.getView().byId("activityList").getSelectedIndices();
-			console.log(aSelects);
+			var oTable = this.getView().byId("activityList"),
+				oBinding = oTable.getBinding(),
+				aSelects = oTable.getSelectedIndices(),
+				aBatchOps = [];
+
+			var aItems = aSelects.map(function(inx){
+
+				return  oBinding.getContextByIndex(inx);
+				// var binding =  oBinding.getContextByIndex(inx);
+
+				// aBatchOps.push(oTable.getModel().createBatchOperation(binding.sPath, "DELETE", binding));
+			});
+	
+
 			if (aSelects.length > 0) {
 				var dialog = new Dialog({
 					title: 'Confirm',
@@ -93,9 +108,39 @@ sap.ui.define([
 						text: 'Delete',
 						enabled: true,
 						press: function () {
-							var sText = sap.ui.getCore().byId('submitDialogTextarea').getValue();
 							
-							dialog.close();
+						var oModel = oTable.getModel();
+
+						// oModel.addBatchChangeOperations(aBatchOps);
+
+						//    model.submitBatch(function(data) {
+						// 	model.refresh();
+						// });
+
+						oModel.setUseBatch(true);
+
+						aItems.forEach(function(item){
+							oModel.remove(item.sPath);
+						});
+
+						oModel.setUseBatch(false);
+
+						function handler(oEvent){
+							var oParam = oEvent.getParameters();
+							if(oParam.method === 'DELETE'){
+
+								var _inx = aItems.findIndex(function( item ){
+									return oParam.url.indexOf(item.sPath) >=0;
+								})
+								aItems.splice(_inx, 1);
+								if(aItems.length === 0){
+									oModel.detachEvent('requestCompleted', handler);
+									oModel.refresh();
+									dialog.close();
+								}
+							}
+						}
+						oModel.attachEvent('requestCompleted', handler);
 						}
 					}),
 					endButton: new Button({
@@ -117,7 +162,6 @@ sap.ui.define([
 
 		onSwitch:function(oEvent){
 
-			console.log("switch *******************************");
 			 var oScope = this.getView().byId("scopeTab");
 			// var omaster = this.getView().byId("master2");
 			 var fScope = sap.ui.xmlfragment(this.getView().getId(), "fin.confin.con.groupshare.view.Scope", this);

@@ -7,7 +7,7 @@ sap.ui.define([
 	return UI5Object.extend("fin.confin.con.groupshare.controller.NewActivity", {
 
 		constructor : function (oView) {
-			this._oView = oView;	
+			this._oView = oView;
 		},
 
 		open : function () {
@@ -20,6 +20,7 @@ sap.ui.define([
 				oDialog = sap.ui.xmlfragment(oView.getId(), "fin.confin.con.groupshare.view.Activity", this);
 				// connect dialog to the root view of this component (models, lifecycle)
 				oView.addDependent(oDialog);
+				oView.byId('newForm').setModel(oView.getModel(), 'NewActivity');
 			}
 			oDialog.open();
 		},
@@ -33,9 +34,10 @@ sap.ui.define([
 				oDi = oView.byId("_di"),
 				oCm = oView.byId("_cm");
 
-			$.ajax({
-
-				  type:"POST", 
+				function buildCURelation(key){
+					return JSON.parse(`{"__deferred":{"uri":"ConsolidationUnits('${key}')"}}`);
+				}
+			$.ajax({type:"POST", 
             		url:'/groupshare/odata.svc/InvestmentActivitys', 
 					contentType:"application/json",
 					data:JSON.stringify({
@@ -48,32 +50,34 @@ sap.ui.define([
 					"PostDate":"/Date(1496636129655)/",
 					"DirectInvestPercentage":oDi.getValue(),
 					"Comments":oCm.getValue(),
-						"ConsolidationUnitDetails":{
-						"__deferred":{
-							"uri":"ConsolidationUnits('C3C9E3B3-2C43-46A0-A726-D09313FC1835')"
-						}
-					},
-						"ConsolidationUnitDetails1":{
-						"__deferred":{
-							"uri":"ConsolidationUnits('67B59B6C-F860-489A-B3AB-F6DF4E605BA7')"
-						}
-					}
-
-					
+						"ConsolidationUnitDetails":buildCURelation(oCu.getSelectedKey()),
+						"ConsolidationUnitDetails1":buildCURelation(oIu.getSelectedKey()),
 			}),
 				success:function(){
-						console.log("success");
-						that._oView.byId("newActivity").close();
+					that._oView.byId('activityList').getModel().refresh();
+					that.onCloseDialog();
 				},
 				error:function(err){
-					console.log("error");
-					console.log(err);
+					console.error("error");
+					console.error(err);
 				}
 			});
 		},
 
 		onCloseDialog : function () {
-		 this._oView.byId("newActivity").close();
+
+			var oView = this._oView,
+				oModel = oView.getModel(),
+			 	that = this,
+			 	oSelect = oView.byId("_fiscalYear"),
+				oCu = oView.byId("_cu"),
+				oIu = oView.byId("_iu"),
+				oDi = oView.byId("_di"),
+				oCm = oView.byId("_cm");
+			
+		//   oCu.setSelectedKey(oModel.);
+		  
+		  this._oView.byId("newActivity").close();
 		}
 	});
 

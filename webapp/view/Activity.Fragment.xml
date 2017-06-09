@@ -28,17 +28,22 @@
             </Select>
 
         <Label text="{i18n>columnCU}"  class="sapUiSmallMarginTop sapUiTinyMarginBottom"/>
-        	<Input
+        	<ActionSelect
 				id="_cu"
-				type="Text"
-				placeholder="Enter Product ..."
-				valueHelpRequest="handleValueHelp"/>
+				items="{path: 'NewActivity>/ConsolidationUnits'}">
+				<items>
+					<core:Item key="{NewActivity>Id}" text="{NewActivity>UnitId}" />
+				</items>
+			</ActionSelect>
         <Label text="{i18n>columnIU}" class="sapUiSmallMarginTop sapUiTinyMarginBottom" />
-        	<Input
+
+		    <ActionSelect
 				id="_iu"
-				type="Text"
-				placeholder="Enter Product ..."
-				valueHelpRequest="handleValueHelp"/>
+				items="{path: 'NewActivity>/ConsolidationUnits'}">
+				<items>
+					<core:Item key="{NewActivity>Id}" text="{NewActivity>UnitId}" />
+				</items>
+			</ActionSelect>
         <Label text="{i18n>columnDI}" class="sapUiSmallMarginTop sapUiTinyMarginBottom"/>
         	<Input
 				id="_di"
