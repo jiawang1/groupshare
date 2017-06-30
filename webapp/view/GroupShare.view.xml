@@ -7,7 +7,8 @@
 			<semantic:FullscreenPage id="page" semanticRuleSet="Optimized" title="{i18n>title}">
 				<l:VerticalLayout xmlns:sap.ui.layout="sap.ui.layout" width="100%" id="__layout0">
 					<l:content>
-						<smartfilterbar:SmartFilterBar id='smartFilterBar' entitySet="InvestmentActivitys" persistencyKey="SmartFilter_Explored">
+						<smartfilterbar:SmartFilterBar id='smartFilterBar' entitySet="InvestmentActivitys" search="onSearch"
+						persistencyKey="SmartFilter_Explored">
 							<smartfilterbar:controlConfiguration>
 								<smartfilterbar:ControlConfiguration groupId="_BASIC" index="1" key="MyOwnFilterField" visibleInAdvancedArea="true" width="300px">
 									<smartfilterbar:customControl>
@@ -30,126 +31,67 @@
 				<IconTabBar id="idIconTabBarNoIcons" class="sapUiResponsiveContentPadding" select="onSwitch">
 					<items>
 						<IconTabFilter text="{i18n>tabActivity}">
-							<smarttable:SmartTable id="ee" entitySet="InvestmentActivitys" smartFilterId="smartFilterBar" header="{i18n>tabActivity}"
-								tableType="AnalyticalTable"  showTablePersonalisation="true" enableAutoBinding="true"   beforeRebindTable="onBeforeRebind">
-											<smarttable:customToolbar>
-												<Toolbar>
-													<Title id="title" header="{i18n>tabActivity}"/>
-													<ToolbarSpacer/>
-													<Button text="New" Type="Transparent" press="onOpenNew"></Button>
-													<Button text="Edit" Type="{sap.m.ButtonType.Transparent}"></Button>
-													<Button text="Delete" Type="Transparent" press="onDelete"></Button>
-												</Toolbar>
-										</smarttable:customToolbar>
-								<table:AnalyticalTable id="activityList" visibleRowCount="20" showColumnVisibilityMenu="true" selectionMode="MultiToggle"
-									 enableColumnFreeze="false" enableCellFilter="true"
-									  >
-									<table:AnalyticalColumn id="ActivityNumber" label="{i18n>columnAN}" leadingProperty="ActivityNumber" grouped="false">
+
+							<table:Table id="activityList" visibleRowCount="5" threshold="5"
+								cellClick="onCellClick"
+								rowHeight="50"
+								cellContextmenu="onCellContextmenu"
+								showNoData="false"
+								showColumnVisibilityMenu="true" selectionMode="MultiToggle"  >
+								<table:toolbar>
+									<Toolbar>
+										<!--<Title id="title" header="{i18n>tabActivity}"/>-->
+										<ToolbarSpacer/>
+										<Button text="Copy" press="onSwitchToCopy" id="fin__copy--normal"></Button>
+										<Button text="Export" press="onExport" id="fin__export--normal"></Button>
+										<Button text="Save" press="onExport" id="fin__save--normal"></Button>
+										<Button text="Save" press="onSaveCopy" id="fin__save--copy" visible="false" ></Button>
+										<Button text="Cancel" press="onCancelCopy" id="fin__cancel--copy" visible="false"></Button>
+									
+										<!--<Button text="Sync" press="onSync"></Button>-->
+									</Toolbar>
+								</table:toolbar>
+
+								<!--<table:rowSettingsTemplate>-->
+									<!--<table:RowSettings highlight="success"/>-->
+								<!--</table:rowSettingsTemplate>-->
+
+									<table:Column id="ActivityNumber" label="{i18n>columnAN}" >
 										<table:template>
-											<Text text="{ActivityNumber}"/>
+											<Input value="{ProfitCenter}" liveChange="onLiveChange"/>
 										</table:template>
-									</table:AnalyticalColumn>
-									<table:AnalyticalColumn id="PostDate" label="{i18n>columnIP}" leadingProperty="PostDate" grouped="false">
+									</table:Column>
+									<table:Column id="PostDate" label="{i18n>columnIP}" >
 										<table:template>
-											<Text text="{PostDate}"/>
+											<Input value="{ControllingArea}" liveChange="onLiveChange"/>
 										</table:template>
-									</table:AnalyticalColumn>
-									<table:AnalyticalColumn id="InvesterText" label="{i18n>columnCU}" showIfGrouped="true" leadingProperty="InvesterText" grouped="false">
+									</table:Column>
+									<table:Column id="InvesterText" label="{i18n>columnCU}" showIfGrouped="true" leadingProperty="InvesterText" grouped="false">
 										<table:template>
-											<Text text="{InvesterText}"/>
+											<Input value="{InvesterText}" liveChange="onLiveChange"/>
 										</table:template>
-									</table:AnalyticalColumn>
-									<table:AnalyticalColumn id="InvesteeText" label="{i18n>columnIU}" showIfGrouped="true" leadingProperty="InvesteeText" grouped="false">
+									</table:Column>
+									<table:Column id="InvesteeText" label="{i18n>columnIU}" showIfGrouped="true" leadingProperty="InvesteeText" grouped="false">
 										<table:template>
-											<Text text="{InvesteeText}"/>
+											<Input value="{InvesteeText}" liveChange="onLiveChange" />
 										</table:template>
-									</table:AnalyticalColumn>
+									</table:Column>
 							
-									<table:AnalyticalColumn id="DirectInvestPercentage" label="{i18n>columnDI}" leadingProperty="DirectInvestPercentage" 
+									<table:Column id="DirectInvestPercentage" label="{i18n>columnDI}" leadingProperty="DirectInvestPercentage" 
 											 grouped="false">
 										<table:template>
-											<Text text="{DirectInvestPercentage}" />
+											<Input value="{DirectInvestPercentage}" liveChange="onLiveChange"/>
 										</table:template>
-									</table:AnalyticalColumn>
-									<table:AnalyticalColumn id="Comments" label="{i18n>columnCS}" showIfGrouped="true" leadingProperty="Comments" grouped="false">
+									</table:Column>
+									<table:Column id="Comments" label="{i18n>columnCS}" showIfGrouped="true" leadingProperty="Comments" grouped="false">
 										<table:template>
-											<Text text="{Comments}"/>
+											<Input value="{Comments}" liveChange="onLiveChange"/>
 										</table:template>
-									</table:AnalyticalColumn>
-								</table:AnalyticalTable>
-							</smarttable:SmartTable>
-
-
-
-
-	
+									</table:Column>
+								</table:Table>
 						</IconTabFilter>
-						<IconTabFilter text="{i18n>tabGroupShare}" id="scopeTab">
-
-
-	<SplitContainer id="SplitContDemo" initialDetail="detail" initialMaster="master2">
-		<detailPages>
-			<Page id="detail" title="Detail 1" class="sapUiStdPage">
-				<content>
-					<Label text="Detail page 1" />
-					<Button text="Go to Detail page2" press="onPressNavToDetail" />
-				</content>
-			</Page>
-			<Page id="detailDetail" title="Detail Detail" class="sapUiStdPage" showNavButton="true"
-				  navButtonText="Back" navButtonPress="onPressDetailBack">
-				<content>
-					<VBox class="sapUiSmallMargin">
-						<Label text="This is Detail Page2" />
-						<Text text="Here you could change the Split Application mode. After the mode change, resize the browser window to see the difference in the master form behaviour." />
-						<RadioButtonGroup columns="1" width="500px" class="sapUiMediumMarginBottom" select="onPressModeBtn">
-							<buttons>
-								<RadioButton id="RB1-1" text="show/hide" selected="true" custom:splitAppMode="ShowHideMode" />
-								<RadioButton id="RB1-2" text="stretch/compress" custom:splitAppMode="StretchCompressMode" />
-								<RadioButton id="RB1-3" text="hide" custom:splitAppMode="HideMode" />
-								<RadioButton id="RB1-4" text="popover" custom:splitAppMode="PopoverMode" />
-							</buttons>
-						</RadioButtonGroup>
-					</VBox>
-				</content>
-			</Page>
-			<Page id="detail2" title="Detail 3 Page" class="sapUiStdPage" showNavButton="true"
-				  navButtonText="Back" navButtonPress="onPressDetailBack">
- 
-				<content>
-					<Label text="This is Detail Page3" />
-					<Input/>
-					<Label text="Label 2" />
-					<Input/>
-					<Label text="Label 3" />
-					<Input/>
-					<Label text="Label 4" />
-					<Input/>
-					<Label text="Label 5" />
-					<Input/>
-				</content>
-			</Page>
-		</detailPages>
-		<masterPages>
-			<Page id="master2" title="Master 2" class="sapUiStdPage">
-				<content>
-					<Text text="Group share go here ..."/>
-					<!--<List itemPress="onListItemPress">
-						<items>
-							<StandardListItem title="To Detail 1" type="Active" custom:to="detail"/>
-							<StandardListItem title="To Detail 2" type="Active" custom:to="detailDetail"/>
-							<StandardListItem title="To Detail 3" type="Active" custom:to="detail2"/>
-						</items>
-					</List>-->
-				</content>
-			</Page>
-		</masterPages>
-	</SplitContainer>
-
-
-
-
-						
-						</IconTabFilter>
+					
+					
 					</items>
 				</IconTabBar>
 			</semantic:FullscreenPage>
